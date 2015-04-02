@@ -126,6 +126,11 @@ class RecordTests: XCTestCase {
             let forms = global.engines!["forms"]
             let syncID = forms!.syncID
             XCTAssertEqual("GXF29AFprnvc", syncID)
+
+            let payload: JSON = global.toPayload()
+            XCTAssertEqual("GXF29AFprnvc", payload["engines"]["forms"]["syncID"].asString!)
+            XCTAssertEqual(1, payload["engines"]["forms"]["version"].asInt!)
+            XCTAssertEqual("bookmarks", payload["declined"].asArray![0].asString!)
         }
     }
 }
